@@ -3,6 +3,7 @@ FROM jenkins/jnlp-slave:3.29-1
 ENV DOCKER_VERSION=18.06.3-ce
 ENV DOCKER_COMPOSE_VERSION=1.24.0
 ENV KUBECTL_VERSION=v1.14.2
+ENV HELM_VERSION=v2.14.1
 
 USER root
 RUN \
@@ -15,5 +16,9 @@ RUN \
     && chmod +x /usr/local/bin/docker-compose \
 		# kubectl
 		&& curl -L "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl \
-    && chmod +x /usr/local/bin/kubectl
+    && chmod +x /usr/local/bin/kubectl \
+		# helm
+		&& curl -fsSLO "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
+		&& tar --strip-components=1 -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz -C /usr/local/bin \
+		&& chmod -R +x /usr/local/bin/helm
 USER jenkins
