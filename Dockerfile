@@ -22,3 +22,7 @@ RUN \
 		&& tar --strip-components=1 -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz \
 		&& mv helm /usr/local/bin \
 		&& chmod -R +x /usr/local/bin/helm
+
+RUN groupadd -for -g 999 docker \
+		&& usermod -aG docker jenkins
+USER jenkins
