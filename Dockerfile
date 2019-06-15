@@ -23,6 +23,6 @@ RUN \
 		&& mv helm /usr/local/bin \
 		&& chmod -R +x /usr/local/bin/helm
 
-RUN groupadd docker \
+RUN groupadd -for -g 0 docker \
 		&& usermod -aG docker jenkins
 USER jenkins
