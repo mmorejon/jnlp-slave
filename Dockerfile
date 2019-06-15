@@ -19,6 +19,10 @@ RUN \
     && chmod +x /usr/local/bin/kubectl \
 		# helm
 		&& curl -fsSLO "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
-		&& tar --strip-components=1 -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz -C /usr/local/bin \
+		&& tar --strip-components=1 -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz \
+		&& mv helm /usr/local/bin \
 		&& chmod -R +x /usr/local/bin/helm
+
+RUN groupadd docker \
+		&& usermod -aG docker jenkins
 USER jenkins
